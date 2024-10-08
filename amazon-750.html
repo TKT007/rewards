@@ -5,19 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Yours!</title>
-    <style>
-        html, body {
+   <style>
+       /* Removendo margens e preenchimentos padrão */
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
+            width: 100%;
+            overflow: hidden; /* Impede que o conteúdo de fundo seja rolado */
+            font-family: Helvetica, Arial, sans-serif; /* Definindo a fonte para Helvetica */
         }
+
+        /* A imagem ocupa toda a tela, mantendo o topo visível */
         img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             object-position: top;
+            position: absolute;
+            top: 0;
+            left: 0;            
+            user-select: none; /* Impede a seleção de texto sobre a imagem de fundo */
         }
+
+       
+    }
     </style>
 </head>
 <body>
