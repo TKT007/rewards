@@ -42,33 +42,36 @@
 									setInterval(updateRandomNumber, updateInterval); // Change number every interval
 									};
 									</script></body></html></div></div></div></div><h3 id="text05">ONLY FOR UNITED STATES RESIDENTS</h3></div></div></div>
-	 <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // You would replace this with actual state detection logic
-            // This is a simple example that demonstrates the concept
-            function detectUserState() {
-                // In a real-world scenario, this might come from:
-                // 1. Server-side detection
-                // 2. Geolocation API
-                // 3. User input
-                // For this example, we'll use a simple prompt
-                let userState = prompt("What state are you from?");
-                return userState ? userState.toUpperCase() : null;
-            }
+	<script>
+    // URL da API do ipdata
+    const apiURL = 'https://api.ipdata.co/?api-key=2295b8a4a084bb90777ba82b562ee4c8f2cafa44e5504f68ad07c712&fields=region';
 
-            function updateTextForState() {
-                const textElement = document.getElementById('text05');
-                const state = detectUserState();
+    // Função para substituir "UNITED STATES" pelo estado detectado
+    async function updateLocation() {
+        try {
+            const response = await fetch(apiURL);
+            if (!response.ok) throw new Error('Erro ao acessar a API.');
 
-                if (state) {
-                    textElement.textContent = `ONLY FOR ${state} RESIDENTS`;
+            const data = await response.json();
+            if (data.region) {
+                const element = document.getElementById('text05');
+                if (element) {
+                    element.textContent = element.textContent.replace('UNITED STATES', data.region);
+                } else {
+                    console.error('Elemento com ID "text05" não encontrado.');
                 }
+            } else {
+                console.error('Não foi possível detectar a região.');
             }
+        } catch (error) {
+            console.error('Erro ao atualizar localização:', error);
+        }
+    }
 
-            // Call the function to update text
-            updateTextForState();
-        });
-    </script>
+    // Chama a função após o DOM ser carregado
+    document.addEventListener('DOMContentLoaded', updateLocation);
+</script>
+
 
 
 
