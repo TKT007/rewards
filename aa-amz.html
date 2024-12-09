@@ -43,44 +43,32 @@
 									};
 									</script></body></html></div></div></div></div><h3 id="text05">ONLY FOR UNITED STATES RESIDENTS</h3></div></div></div>
 	<script>
-    // URL da API de Geolocalização
-    const geoApiUrl = 'https://ip-api.com/json/?fields=regionName,country';
-
-    // Função para substituir o texto "UNITED STATES" pelo estado
-    async function updateLocationText() {
-        try {
-            // Faz a requisição para a API
-            const response = await fetch(geoApiUrl);
-            
-            if (!response.ok) {
-                console.error('Erro na requisição da API.');
-                return;
-            }
-
-            const data = await response.json();
-
-            // Valida se a API retornou os dados necessários
-            if (data && data.regionName && data.country === 'United States') {
-                // Seleciona o elemento HTML
-                const locationElement = document.getElementById('text05');
-
-                if (locationElement) {
-                    // Substitui "UNITED STATES" pelo estado detectado
-                    locationElement.textContent = locationElement.textContent.replace('UNITED STATES', data.regionName);
-                } else {
-                    console.error('Elemento com ID "text05" não encontrado.');
-                }
-            } else {
-                console.error('Localização não detectada ou fora dos Estados Unidos.');
-            }
-        } catch (error) {
-            console.error('Erro ao processar a localização:', error);
+    fetch(
+        'https://api.ipdata.co/?api-key=2295b8a4a084bb90777ba82b562ee4c8f2cafa44e5504f68ad07c712&fields=region,postal',
+        {method: 'GET', headers: {Accept: 'application/json'}}
+    )
+    .then(function (response) {
+        if (!response.ok) {
+            throw new Error('Erro na resposta da API: ' + response.status);
         }
-    }
-
-    // Executa a função quando o DOM estiver carregado
-    document.addEventListener('DOMContentLoaded', updateLocationText);
+        return response.json();
+    })
+    .then(function (response) {
+        if (response.region) {
+            // Substitui "UNITED STATES" pelo estado detectado
+            const locationElement = document.getElementById('text05');
+            if (locationElement) {
+                locationElement.textContent = locationElement.textContent.replace('UNITED STATES', response.region);
+            }
+        } else {
+            console.error('Estado não detectado.');
+        }
+    })
+    .catch(function (err) {
+        console.error('Erro ao detectar localização:', err);
+    });
 </script>
+
 
 
 
