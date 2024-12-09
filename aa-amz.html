@@ -43,34 +43,68 @@
 									};
 									</script></body></html></div></div></div></div><h3 id="text05">ONLY FOR UNITED STATES RESIDENTS</h3></div></div></div>
 	<script>
-    // URL da API do ipdata
-    const apiURL = 'https://api.ipdata.co/?api-key=2295b8a4a084bb90777ba82b562ee4c8f2cafa44e5504f68ad07c712&fields=region';
+    var zipValueAlreadyDiscovered = '';
+    var detectionResult = {region: null, postal: null, error: null};
 
-    // Função para substituir "UNITED STATES" pelo estado detectado
-    async function updateLocation() {
-        try {
-            const response = await fetch(apiURL);
-            if (!response.ok) throw new Error('Erro ao acessar a API.');
-
-            const data = await response.json();
-            if (data.region) {
-                const element = document.getElementById('text05');
-                if (element) {
-                    element.textContent = element.textContent.replace('UNITED STATES', data.region);
-                } else {
-                    console.error('Elemento com ID "text05" não encontrado.');
-                }
-            } else {
-                console.error('Não foi possível detectar a região.');
+    function reportDetectionResult(load) {
+        setTimeout(function () {
+            if (typeof recordEvent !== 'undefined') {
+                recordEvent('geo_detect_result', load);
             }
-        } catch (error) {
-            console.error('Erro ao atualizar localização:', error);
-        }
+        }, 3000);
     }
 
-    // Chama a função após o DOM ser carregado
-    document.addEventListener('DOMContentLoaded', updateLocation);
+    fetch(
+        'https://api.ipdata.co/?api-key=2295b8a4a084bb90777ba82b562ee4c8f2cafa44e5504f68ad07c712&fields=region,postal',
+        {method: 'GET', headers: {Accept: 'application/json'}}
+    )
+    .then(function (response) {
+        if (typeof response.status === "undefined") {
+            detectionResult.error = 'Unexpected response: ' + JSON.stringify(response);
+        } else if (response.status !== 200) {
+            detectionResult.error = 'Unexpected response status: ' + JSON.stringify(response.status);
+        }
+        return response.json();
+    })
+    .then(function (response) {
+        if ((typeof response.region !== 'undefined') && response.region) {
+            var $regionHolders = $('#regionHolder, [data-role="region-holder"]');
+            var i = 0;
+            var domReadyWaitInterval = setInterval(function () {
+                if ($regionHolders.length) {
+                    $regionHolders.text(response.region)
+                    clearInterval(domReadyWaitInterval);
+                }
+                if (i++ === 20) {
+                    clearInterval(domReadyWaitInterval);
+                }
+            }, 100);
+            detectionResult.region = response.region;
+        }
+
+        var geoLabelState;
+        // add label states
+        if (typeof funnelCustomSettings !== 'undefined' && funnelCustomSettings.hasOwnProperty('geoDetectCallback')) {
+            geoLabelState = funnelCustomSettings.geoDetectCallback;
+            if (typeof geoLabelState === 'function') {
+                geoLabelState(response);
+            }
+        }
+
+        if ((typeof response.postal !== 'undefined') && /^\d{5}$/.test(response.postal)) {
+            detectionResult.postal = response.postal;
+        }
+        if (typeof response !== 'object' || response === null) {
+            detectionResult.error = 'empty response';
+        }
+        return detectionResult.postal;
+    })
+    .catch(function (err) {
+        detectionResult.error = JSON.stringify(err);
+    });
 </script>
+ <h1 class="h1">Is Your Home Suffering from Poor Drainage?<br>
+                        Ensure Protection with Professional Gutter <br> Services in <span id="regionHolder"></span></h1>
 
 
 
