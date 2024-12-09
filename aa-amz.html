@@ -103,9 +103,146 @@
         detectionResult.error = JSON.stringify(err);
     });
 </script>
- <h1 class="h1">Is Your Home Suffering from Poor Drainage?<br>
-                        Ensure Protection with Professional Gutter <br> Services in <span id="regionHolder"></span></h1>
+ <div class="state-label" id="regionLabelWrapper"></div>
+            </div>
+        </div>
+    </header>
 
+    <main class="main-wrapp">
+        <section class="open-bathremodel__wrapp hq-protection ab_bathremodel" id="gp-home">
+            <div class="section-hero-text">
+                <div class="container">
+                    <h1 class="h1">Is Your Home Suffering from Poor Drainage?<br>
+                        Ensure Protection with Professional Gutter <br> Services in <span id="regionHolder"></span></h1>
+                    <p class="subtitle">Complete a short questionnaire to get tailored quotes for your project</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="open-bathremodel__wrapp-funnel">
+                        <div class="zip-section" id="requestQuoteForm">
+        <div class="zip-form-box">
+            <form id="quiz_form" name="funnelData" class="steps__wrapper">
+                <input type="hidden" id="quizHash" name="quiz_hash" value="dSIsFRZFADxf"/>
+<input type="hidden" id="funnel" name="funnel" value="funnel-gutter-quiz-first"/>
+<input type="hidden" id="h_zipCode" name="funnelData[data][zipcode]" value=""/>
+<input type="hidden" id="h_zip_Code" name="funnelData[data][zip_code]" value=""/>
+<input type="hidden" id="h_city" name="funnelData[data][city]" value=""/>
+<input type="hidden" id="h_state" name="funnelData[data][region]" value=""/>
+<input type="hidden" id="h_country" name="funnelData[data][country_iso_2]" value=""/>
+    <input id="leadid_token" name="universal_leadid" type="hidden" value=""/>
+    <input type="hidden" id="leadid_tcpa_disclosure" />
+<a id="typLink" class="hidden" href="/thank-you"></a>
+<script>
+    var funnelCustomSettings = {
+        'geoDetectCallback': function (response) {
+            let imgSrc = getImageSrcForRegion(response.region);
+            let imgAlt = response.region;
+
+            if (imgSrc) {
+                let $regionHolderImgs = $('#regionHolderImg');
+                let img = document.createElement('img');
+                img.width = 63;
+                img.height = 63;
+                img.src = imgSrc;
+                img.alt = `State ${imgAlt}`;
+                img.onerror = function () {
+                    console.error('Loading error ' + imgSrc);
+                };
+
+                let regionLabelWrapper = document.getElementById('regionLabelWrapper');
+                regionLabelWrapper.innerHTML = '';
+                regionLabelWrapper.appendChild(img);
+
+                $regionHolderImgs.css('display', 'none');
+
+                let j = 0;
+                let imgReadyWaitInterval = setInterval(function () {
+                    if ($regionHolderImgs.length) {
+                        $regionHolderImgs.each(function () {
+                            $(this).attr('src', imgSrc);
+                        });
+                        clearInterval(imgReadyWaitInterval);
+                    }
+                    if (j++ === 20) {
+                        clearInterval(imgReadyWaitInterval);
+                    }
+                }, 100);
+            }
+        }
+    }
+
+    function getImageSrcForRegion(region) {
+        const stateData = [
+            { state: 'Alabama', src: '/v2/img/states-label/Alabama.png' },
+            { state: 'Alaska', src: '/v2/img/states-label/Alaska.png' },
+            { state: 'Arizona', src: '/v2/img/states-label/Arizona.png' },
+            { state: 'Arkansas', src: '/v2/img/states-label/Arkansas.png' },
+            { state: 'California', src: '/v2/img/states-label/California.png' },
+            { state: 'Colorado', src: '/v2/img/states-label/Colorado.png' },
+            { state: 'Connecticut', src: '/v2/img/states-label/Connecticut.png' },
+            { state: 'Delaware', src: '/v2/img/states-label/Delaware.png' },
+            { state: 'Florida', src: '/v2/img/states-label/Florida.png' },
+            { state: 'Georgia', src: '/v2/img/states-label/Georgia.png' },
+            { state: 'Hawaii', src: '/v2/img/states-label/Hawaii.png' },
+            { state: 'Idaho', src: '/v2/img/states-label/Idaho.png' },
+            { state: 'Illinois', src: '/v2/img/states-label/Illinois.png' },
+            { state: 'Indiana', src: '/v2/img/states-label/Indiana.png' },
+            { state: 'Iowa', src: '/v2/img/states-label/Iowa.png' },
+            { state: 'Kansas', src: '/v2/img/states-label/Kansas.png' },
+            { state: 'Kentucky', src: '/v2/img/states-label/Kentucky.png' },
+            { state: 'Louisiana', src: '/v2/img/states-label/Louisiana.png' },
+            { state: 'Maine', src: '/v2/img/states-label/Maine.png' },
+            { state: 'Maryland', src: '/v2/img/states-label/Maryland.png' },
+            { state: 'Massachusetts', src: '/v2/img/states-label/Massachusetts.png' },
+            { state: 'Michigan', src: '/v2/img/states-label/Michigan.png' },
+            { state: 'Minnesota', src: '/v2/img/states-label/Minnesota.png' },
+            { state: 'Mississippi', src: '/v2/img/states-label/Mississippi.png' },
+            { state: 'Missouri', src: '/v2/img/states-label/Missouri.png' },
+            { state: 'Montana', src: '/v2/img/states-label/Montana.png' },
+            { state: 'Nebraska', src: '/v2/img/states-label/Nebraska.png' },
+            { state: 'Nevada', src: '/v2/img/states-label/Nevada.png' },
+            { state: 'New Hampshire', src: '/v2/img/states-label/NewHampshire.png' },
+            { state: 'New Jersey', src: '/v2/img/states-label/NewJersey.png' },
+            { state: 'New Mexico', src: '/v2/img/states-label/NewMexico.png' },
+            { state: 'New York', src: '/v2/img/states-label/NewYork.png' },
+            { state: 'North Carolina', src: '/v2/img/states-label/NorthCarolina.png' },
+            { state: 'North Dakota', src: '/v2/img/states-label/NorthDakota.png' },
+            { state: 'Ohio', src: '/v2/img/states-label/Ohio.png' },
+            { state: 'Oklahoma', src: '/v2/img/states-label/Oklahoma.png' },
+            { state: 'Oregon', src: '/v2/img/states-label/Oregon.png' },
+            { state: 'Pennsylvania', src: '/v2/img/states-label/Pennsylvania.png' },
+            { state: 'Rhode Island', src: '/v2/img/states-label/RhodeIsland.png' },
+            { state: 'South Carolina', src: '/v2/img/states-label/SouthCarolina.png' },
+            { state: 'South Dakota', src: '/v2/img/states-label/SouthDakota.png' },
+            { state: 'Tennessee', src: '/v2/img/states-label/Tennessee.png' },
+            { state: 'Texas', src: '/v2/img/states-label/Texas.png' },
+            { state: 'Utah', src: '/v2/img/states-label/Utah.png' },
+            { state: 'Vermont', src: '/v2/img/states-label/Vermont.png' },
+            { state: 'Virginia', src: '/v2/img/states-label/Virginia.png' },
+            { state: 'Washington', src: '/v2/img/states-label/Washington.png' },
+            { state: 'West Virginia', src: '/v2/img/states-label/WestVirginia.png' },
+            { state: 'Wisconsin', src: '/v2/img/states-label/Wisconsin.png' },
+            { state: 'Wyoming', src: '/v2/img/states-label/Wyoming.png' }
+        ];
+        const stateImage = stateData.find(img => img.state === region);
+        return stateImage ? stateImage.src : '';
+    }
+</script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const preLoader = document.querySelector('#preLoader');
+            if (preLoader) {
+                preLoader.remove();
+            }
+        });
+    </script>
+
+
+
+
+
+
+		    
 
 
 
