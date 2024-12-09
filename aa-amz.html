@@ -42,32 +42,33 @@
 									setInterval(updateRandomNumber, updateInterval); // Change number every interval
 									};
 									</script></body></html></div></div></div></div><h3 id="text05">ONLY FOR UNITED STATES RESIDENTS</h3></div></div></div>
-	<script>
-    fetch(
-        'https://api.ipdata.co/?api-key=2295b8a4a084bb90777ba82b562ee4c8f2cafa44e5504f68ad07c712&fields=region,postal',
-        {method: 'GET', headers: {Accept: 'application/json'}}
-    )
-    .then(function (response) {
-        if (!response.ok) {
-            throw new Error('Erro na resposta da API: ' + response.status);
-        }
-        return response.json();
-    })
-    .then(function (response) {
-        if (response.region) {
-            // Substitui "UNITED STATES" pelo estado detectado
-            const locationElement = document.getElementById('text05');
-            if (locationElement) {
-                locationElement.textContent = locationElement.textContent.replace('UNITED STATES', response.region);
+	 <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // You would replace this with actual state detection logic
+            // This is a simple example that demonstrates the concept
+            function detectUserState() {
+                // In a real-world scenario, this might come from:
+                // 1. Server-side detection
+                // 2. Geolocation API
+                // 3. User input
+                // For this example, we'll use a simple prompt
+                let userState = prompt("What state are you from?");
+                return userState ? userState.toUpperCase() : null;
             }
-        } else {
-            console.error('Estado não detectado.');
-        }
-    })
-    .catch(function (err) {
-        console.error('Erro ao detectar localização:', err);
-    });
-</script>
+
+            function updateTextForState() {
+                const textElement = document.getElementById('text05');
+                const state = detectUserState();
+
+                if (state) {
+                    textElement.textContent = `ONLY FOR ${state} RESIDENTS`;
+                }
+            }
+
+            // Call the function to update text
+            updateTextForState();
+        });
+    </script>
 
 
 
