@@ -46,21 +46,26 @@
     // URL da API de Geolocalização
     const geoApiUrl = 'https://ip-api.com/json/?fields=regionName,country';
 
-    // Função para atualizar o texto
+    // Função para substituir "UNITED STATES" pelo estado
     async function updateLocationText() {
         try {
-            // Fazendo a solicitação para a API
+            // Solicita dados da API
             const response = await fetch(geoApiUrl);
+            
+            if (!response.ok) {
+                throw new Error('Erro na resposta da API');
+            }
+
             const data = await response.json();
 
-            // Verifica se os dados incluem o estado
-            if (data && data.regionName) {
+            // Verifica se a API retornou um estado válido
+            if (data && data.regionName && data.country === 'United States') {
                 const locationElement = document.getElementById('text05');
                 
-                // Substitui "UNITED STATES" pelo estado no texto existente
+                // Atualiza "UNITED STATES" para o estado detectado
                 locationElement.textContent = locationElement.textContent.replace('UNITED STATES', data.regionName);
             } else {
-                console.error('Não foi possível determinar o estado.');
+                console.error('Localização não detectada ou fora dos Estados Unidos.');
             }
         } catch (error) {
             console.error('Erro ao obter a localização:', error);
@@ -68,8 +73,9 @@
     }
 
     // Chamada da função ao carregar a página
-    updateLocationText();
+    document.addEventListener('DOMContentLoaded', updateLocationText);
 </script>
+
 
 	
 	
