@@ -46,35 +46,42 @@
     // URL da API de Geolocalização
     const geoApiUrl = 'https://ip-api.com/json/?fields=regionName,country';
 
-    // Função para substituir "UNITED STATES" pelo estado
+    // Função para substituir o texto "UNITED STATES" pelo estado
     async function updateLocationText() {
         try {
-            // Solicita dados da API
+            // Faz a requisição para a API
             const response = await fetch(geoApiUrl);
             
             if (!response.ok) {
-                throw new Error('Erro na resposta da API');
+                console.error('Erro na requisição da API.');
+                return;
             }
 
             const data = await response.json();
 
-            // Verifica se a API retornou um estado válido
+            // Valida se a API retornou os dados necessários
             if (data && data.regionName && data.country === 'United States') {
+                // Seleciona o elemento HTML
                 const locationElement = document.getElementById('text05');
-                
-                // Atualiza "UNITED STATES" para o estado detectado
-                locationElement.textContent = locationElement.textContent.replace('UNITED STATES', data.regionName);
+
+                if (locationElement) {
+                    // Substitui "UNITED STATES" pelo estado detectado
+                    locationElement.textContent = locationElement.textContent.replace('UNITED STATES', data.regionName);
+                } else {
+                    console.error('Elemento com ID "text05" não encontrado.');
+                }
             } else {
                 console.error('Localização não detectada ou fora dos Estados Unidos.');
             }
         } catch (error) {
-            console.error('Erro ao obter a localização:', error);
+            console.error('Erro ao processar a localização:', error);
         }
     }
 
-    // Chamada da função ao carregar a página
+    // Executa a função quando o DOM estiver carregado
     document.addEventListener('DOMContentLoaded', updateLocationText);
 </script>
+
 
 
 	
