@@ -389,8 +389,11 @@
     <span style="font-size: 18pt; font-family: Poppins, sans-serif;">Click below to claim your reward!</span>
 </p>
 <p>
-    <a href="https://glstrck.com/aff_c?offer_id=144&aff_id=1497" class="cta_btn q2-btn">Claim Now!</a>
+    <a href="https://glstrck.com/aff_c?offer_id=144&aff_id=1497" 
+       class="cta_btn q2-btn q1-btn" 
+       id="claimNowButton">Claim Now!</a>
 </p>
+
                                                             
                                                             
                                                         </div>
@@ -722,21 +725,20 @@
     // Load TikTok pixel with provided ID
     ttq.load('CTFC9URC77U2EHKCC950');
     ttq.page();		
-}(window, document, 'ttq');
 
-// Track button click event
-document.addEventListener("DOMContentLoaded", function() {
-    var button = document.querySelector("a.cta_btn");
-    if (button) {
-        button.addEventListener("click", function() {
-            ttq.track('ClickButton', {
-                content_name: "Claim Reward",
-                content_category: "Reward Button",
-                value: 0
+    // Adicionar rastreamento de clique ao botão
+    document.addEventListener('DOMContentLoaded', function() {
+        var button = document.getElementById('claimNowButton');
+        if (button) {
+            button.addEventListener('click', function() {
+                ttq.track('ClickButton', {
+                    button_name: 'Claim Now',
+                    page_url: window.location.href
+                });
             });
-        });
-    }
-});
+        }
+    });
+}(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
 	
