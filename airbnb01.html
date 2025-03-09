@@ -383,7 +383,7 @@
                                                         <div style="margin-top: -25px;" class="question" id="q1">
                                                             
 							    <p style="text-align: center; margin-top: -20px"><span style="font-size: 18pt; font-family: Poppins, sans-serif;">Click below to claim your reward!</span>
-                                                            <p><a href="https://glitchy.go2cloud.org/aff_c?offer_id=929&aff_id=1497&source=bnbvrcl"  class="cta_btn q2-btn" class="cta_btn q1-btn">Claim Now!</a>
+                                                            <p><a href="https://glstrck.com/aff_c?offer_id=163&aff_id=18892"  class="cta_btn q2-btn" class="cta_btn q1-btn">Claim Now!</a>
                                                             </p>
                                                             
                                                             
@@ -577,22 +577,42 @@
         <!--]-->
     </div>
   
-<meta http-equiv="delegate-ch" content="sec-ch-ua https://bx942.bemobtrcks.com; sec-ch-ua-mobile https://bx942.bemobtrcks.com; sec-ch-ua-arch https://bx942.bemobtrcks.com; sec-ch-ua-model https://bx942.bemobtrcks.com; sec-ch-ua-platform https://bx942.bemobtrcks.com; sec-ch-ua-platform-version https://bx942.bemobtrcks.com; sec-ch-ua-bitness https://bx942.bemobtrcks.com; sec-ch-ua-full-version-list https://bx942.bemobtrcks.com; sec-ch-ua-full-version https://bx942.bemobtrcks.com">
-	<script type="text/javascript">
-function bemobCb(params) {
-    var t = params.trackingDomain+'/click/';
-    var re = new RegExp(t+'?(\\d*)');
-    var e = document.querySelectorAll('a[href*="'+t+'"]');
-    for (var i = 0; i < e.length; i++) {
-        var ex = re.exec(e[i].href);
-        if (ex) {
-            e[i].href = params.ctaSecureUrl.replace('%%OFFER_NUMBER%%', ex[1] || 1);
+ <script>
+        // Função para obter parâmetros da URL
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
-    }
-}
-</script>
-<script type="text/javascript">!function(){var a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src="https://bx942.bemobtrcks.com/landing/54265ebd-966b-4400-9784-d0c621c432a2?callback=bemobCb&rule=1&path=1&landing=1&"+window.location.search.substring(1);var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)}();</script><noscript><img src="https://bx942.bemobtrcks.com/landing/54265ebd-966b-4400-9784-d0c621c432a2?rule=1&path=1&landing=1" alt=""></noscript>
-	
+
+        // Capturar o valor de "source" da URL
+        var sourceValue = getParameterByName('source');
+
+        // Função para adicionar "source" a todos os links
+        function addSourceToLinks() {
+            var links = document.querySelectorAll('a'); // Seleciona todos os links
+            links.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    // Verificar se o link já tem um "?" (já tem parâmetros)
+                    var separator = link.href.includes('?') ? '&' : '?';
+                    // Adicionar o parâmetro "source" ao link
+                    var newHref = link.href + separator + 'source=' + encodeURIComponent(sourceValue);
+                    // Atualizar o href do link
+                    link.href = newHref;
+                });
+            });
+        }
+
+        // Executar a função quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sourceValue) {
+                addSourceToLinks();
+            }
+        });
+    </script>
 </body>
 
 </html>
